@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-import random, time
-from visualizer import Turtle
+import random, time, threading
+import visualizer
 
+TICK_DURATION = 1/16 # 1/32 note at 120bpm
+MAX_BRANCH_AGE = 125
 
 class Branch():
 
@@ -16,8 +18,15 @@ class Branch():
     def has_leaf(self):
         return len(self.children) == 0
 
+    def grow(self):
+        if self.age < MAX_BRANCH_AGE:
+            self.age += 1
+            for child in self.children:
+                child.grow()
+            if self.has_leaf:
+                self.split()
 
-    ## the character of the tree is defined by this method ##
+    ## BRANCH STRUCTURE ##
     def split(self):
         if self.age >= 10 and random.random() > .75:
             if random.random() > 1/4:
@@ -27,39 +36,26 @@ class Branch():
                 self.children.append(Branch(self, random.randint(-50, -40)))
 
 
+class Tree(threading.Thread):
 
-def grow(branch):
-    if branch.age < 125:
-        branch.age += 1
-        for child in branch.children:
-            grow(child)
-        if branch.has_leaf:
-            branch.split()
+    def __init__(self):
+        super(Tree, self).__init__()
+        self.daemon = True
+        self.root = Branch()
+        self.start()
 
-
-def draw(branch, angle=0):
-    t.right(branch.angle)
-    t.width = branch.age / 4
-    t.color = 50, 0, 0
-    t.forward(branch.age)
-    t.circle(t.width / 2)
-    if branch.has_leaf:
-        t.color = 0, 150, 20
-        t.circle(5)
-    else:
-        x, y = t.x, t.y
-        angle = t.a
-        for c, child in enumerate(branch.children):
-            draw(child)
-            t.jump(x, y)
-            t.face(angle)
+    ## MAIN TIMER ##
+    def run(self):
+        start_t = time.time()
+        while True:
+            self.root.grow()
+            time.sleep(TICK_DURATION)
+            stop_t = time.time()
+            elapsed = stop_t - start_t
+            if abs(elapsed - TICK_DURATION) > 1/60:
+                print(f"bad timing: {abs(elapsed - TICK_DURATION) * 1000}ms")
+            start_t = stop_t
 
 
-t = Turtle(1000, 700, "GROWTH")
-root = Branch()
-def run():
-    t.reset()
-    t.jump(500, 700)
-    draw(root)
-    grow(root)
-t.start(run)
+tree = Tree()
+visualizer.start(tree.root)
