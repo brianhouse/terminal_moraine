@@ -2,9 +2,12 @@
 
 import random, time, threading
 import visualizer
+from util.midi import midi_out
 
 TICK_DURATION = 1/16 # 1/32 note at 120bpm
 MAX_BRANCH_AGE = 125
+
+midi_out.log_midi = True
 
 class Branch():
 
@@ -28,7 +31,11 @@ class Branch():
 
     ## BRANCH STRUCTURE ##
     def split(self):
+
         if self.age >= 10 and random.random() > .75:
+
+            midi_out.send_note(1, 60, 127)  # channel, note, velocity
+
             if random.random() > 1/4:
                 self.children.append(Branch(self, random.randint(-30, -20)))
                 self.children.append(Branch(self, random.randint(40, 50)))
@@ -52,8 +59,9 @@ class Tree(threading.Thread):
             time.sleep(TICK_DURATION)
             stop_t = time.time()
             elapsed = stop_t - start_t
-            if abs(elapsed - TICK_DURATION) > 1/60:
-                print(f"bad timing: {abs(elapsed - TICK_DURATION) * 1000}ms")
+            delta = abs(elapsed - TICK_DURATION)
+            if delta > 1/60:
+                print(f"bad timing: {int(delta * 1000)}ms")
             start_t = stop_t
 
 
