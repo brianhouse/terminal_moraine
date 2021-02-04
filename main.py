@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-import random, time, threading
+import time, threading
 import visualizer
+from random import random, randint
 from util.midi import midi_out
 
 TICK_DURATION = 1/16 # 1/32 note at 120bpm
@@ -32,15 +33,15 @@ class Branch():
     ## BRANCH STRUCTURE ##
     def split(self):
 
-        if self.age >= 10 and random.random() > .75:
+        if self.age >= 10 and random() > .75:
 
-            midi_out.send_note(1, 60, 127)  # channel, note, velocity
+            midi_out.send_note(1, randint(1, 127), 127)  # channel, note, velocity
 
-            if random.random() > 1/4:
-                self.children.append(Branch(self, random.randint(-30, -20)))
-                self.children.append(Branch(self, random.randint(40, 50)))
+            if random() > 1/4:
+                self.children.append(Branch(self, randint(-30, -20)))
+                self.children.append(Branch(self, randint(40, 50)))
             else:
-                self.children.append(Branch(self, random.randint(-50, -40)))
+                self.children.append(Branch(self, randint(-50, -40)))
 
 
 class Tree(threading.Thread):
