@@ -6,42 +6,54 @@ from random import random, randint
 from util.midi import midi_out
 
 TICK_DURATION = 1/16 # 1/32 note at 120bpm
-MAX_BRANCH_AGE = 125
+MAX_LEAVES = 128
 
 midi_out.log_midi = True
 
-class Branch():
 
-    def __init__(self, parent=None, angle=0):
+class Leaf():
+
+    number = 0
+
+    def __init__(self, limb):
+        self.channel = Leaf.number + 1
+        self.limb = limb
+        Leaf.number += 1
+
+        midi_out.send_note(1, randint(1, 127), 127)  # channel, note, velocity
+
+
+
+class Limb():
+
+    def __init__(self, parent=None, angle=0, leaf=None):
         self.parent = parent
         self.children = []
         self.age = 0
         self.angle = angle
+        self.leaf = leaf or Leaf(self)
 
     @property
     def has_leaf(self):
-        return len(self.children) == 0
+        return self.leaf != None
 
     def grow(self):
-        if self.age < MAX_BRANCH_AGE:
+        if Leaf.number < MAX_LEAVES:
             self.age += 1
             for child in self.children:
                 child.grow()
             if self.has_leaf:
-                self.split()
+                self.branch()
 
-    ## BRANCH STRUCTURE ##
-    def split(self):
-
-        if self.age >= 10 and random() > .75:
-
-            midi_out.send_note(1, randint(1, 127), 127)  # channel, note, velocity
-
+    def branch(self):
+        if Leaf.number < MAX_LEAVES and self.age >= 10 and random() > .75:
             if random() > 1/4:
-                self.children.append(Branch(self, randint(-30, -20)))
-                self.children.append(Branch(self, randint(40, 50)))
+                self.children.append(Limb(self, randint(-30, -20), self.leaf))
+                self.children.append(Limb(self, randint(40, 50)))
             else:
-                self.children.append(Branch(self, randint(-50, -40)))
+                self.children.append(Limb(self, randint(-50, -40), self.leaf))
+            self.leaf = None
+
 
 
 class Tree(threading.Thread):
@@ -49,7 +61,7 @@ class Tree(threading.Thread):
     def __init__(self):
         super(Tree, self).__init__()
         self.daemon = True
-        self.root = Branch()
+        self.root = Limb()
         self.start()
 
     ## MAIN TIMER ##
@@ -64,6 +76,7 @@ class Tree(threading.Thread):
             if delta > 1/60:
                 print(f"bad timing: {int(delta * 1000)}ms")
             start_t = stop_t
+
 
 
 tree = Tree()
