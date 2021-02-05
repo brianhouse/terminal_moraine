@@ -6,6 +6,7 @@ from rtmidi.midiconstants import NOTE_ON, NOTE_OFF, CONTROLLER_CHANGE
 class MidiOut(threading.Thread):
 
     def __init__(self, interface=0, throttle=0):
+        print("Starting MIDI...")
         threading.Thread.__init__(self)
         self.daemon = True
         self._interface = interface
