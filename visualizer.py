@@ -10,7 +10,7 @@ def draw(limb):
     if limb.leaf:
         ctx.circle(*limb.leaf.position, 5 * limb.leaf.intensity, (0, 150, 20))
 
-def start(root):
+def start(tree):
     def loop():
-        draw(root)
+        draw(tree.root)
     ctx.start(loop)

@@ -1,18 +1,17 @@
 import time, threading, math
 from random import random, randint
 
-leaves = []
-
 class Leaf():
 
     number = 0
 
-    def __init__(self, limb):
+    def __init__(self, tree, limb):
         self.id = Leaf.number
-        leaves.append(self)
         Leaf.number += 1
+        self.tree = tree
         self.limb = limb
         self.intensity = 0
+        self.tree.leaves.append(self)
 
     @property
     def position(self):
@@ -25,10 +24,15 @@ class Leaf():
 
 class Limb():
 
-    def __init__(self, parent=None, angle=-90, leaf=None):
+    number = 0
+
+    def __init__(self, tree, parent=None, angle=-90, leaf=None):
+        self.id = Limb.number
+        Limb.number += 1
+        self.tree = tree
         self.parent = parent
         self.children = []
-        self.leaf = Leaf(self) if not leaf else leaf.move(self)
+        self.leaf = Leaf(tree, self) if not leaf else leaf.move(self)
         self.size = 0
         self.angle = angle
         self.start = self.parent.end if self.parent else Tree.ORIGIN
@@ -37,7 +41,7 @@ class Limb():
     def grow(self, day):
         if self.leaf:
             self.leaf.intensity = leaf_function(day, self.leaf.id)
-        if len(leaves) < Tree.MAX_LEAVES:
+        if len(self.tree.leaves) < Tree.MAX_LEAVES:
             self.start = self.parent.end if self.parent else Tree.ORIGIN
             self.size += growth_function(day) * Tree.GROWTH_RATE
             self.end = get_point(self.start, self.angle, self.size)
@@ -51,11 +55,11 @@ class Limb():
     ## TREE STRUCTURE IS DEFINED HERE ##
     def branch(self):
         if random() > 1/4:
-            a = Limb(self, self.angle + randint(-30, -20), self.leaf)
-            b = Limb(self, self.angle + randint(40, 50))
+            a = Limb(self.tree, self, self.angle + randint(-30, -20), self.leaf)
+            b = Limb(self.tree, self, self.angle + randint(40, 50))
             self.children = [a, b]
         else:
-            a = Limb(self, self.angle + randint(-50, -40), self.leaf)
+            a = Limb(self.tree, self, self.angle + randint(-50, -40), self.leaf)
             self.children = [a]
         self.leaf = None
 
@@ -69,10 +73,10 @@ class Tree(threading.Thread):
         for key, value in config.items():
             setattr(Tree, key, value)
         self.callback = callback
-        self.root = Limb()
+        self.leaves = []
+        self.root = Limb(self)
         self.start()
 
-    ## MAIN TIMER ##
     def run(self):
         start_t = time.time()
         ticks = 0
@@ -87,12 +91,10 @@ class Tree(threading.Thread):
                 print(f"whoops, perceptible latency: {int(delta * 1000)}ms")
             start_t = stop_t
 
-
-    ## MAIN LOOP ##
     def update(self, day):
         self.root.grow(day)
         if self.callback:
-            self.callback()
+            self.callback(self)
 
 
 def growth_function(day):
