@@ -21,9 +21,12 @@ leaves = []
 
 class Leaf():
 
+    number = 0
+
     def __init__(self, limb):
-        self.id = len(leaves)
+        self.id = Leaf.number
         leaves.append(self)
+        Leaf.number += 1
         self.limb = limb
         self.intensity = 0
         # play note on creation
@@ -121,6 +124,8 @@ class Tree(threading.Thread):
             # midi_out.send_control(1, leaf.id, x)
             # midi_out.send_control(2, leaf.id, y)
             # midi_out.send_control(3, leaf.id, v)
+
+            # midi_out.send_control(127, 127, 127)
 
 
 def growth_function(day):
