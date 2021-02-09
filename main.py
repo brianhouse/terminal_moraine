@@ -60,7 +60,7 @@ def sonify(tree):
 
     # show "water" distributed through limbs
     # for limb in tree.limbs:
-    #     print("limb", limb.id, limb.length, limb.water, limb.percentage)
+    #     print("limb", limb.id, limb.length, limb.water, limb.percent)
 
 
 
