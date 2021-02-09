@@ -44,7 +44,7 @@ class Limb():
     def grow(self, day):
         if self.leaf:
             self.leaf.intensity = leaf_function(day, self.leaf.id)
-        if self.size < Tree.MAX_TRUNK_SIZE:
+        if self.tree.root.size < Tree.MAX_ROOT_SIZE:
             self.start = self.parent.end if self.parent else Tree.ORIGIN
             self.size += growth_function(day) * Tree.GROWTH_RATE
             self.end = get_point(self.start, self.angle, self.size)
@@ -54,8 +54,8 @@ class Limb():
                 self.size > Tree.BRANCH_MIN_SIZE and \
                 random() > Tree.BRANCH_PROB:
                 self.branch()
-            for child in self.children:
-                child.grow(day)
+        for child in self.children:
+            child.grow(day)
 
 
     ## TREE STRUCTURE IS DEFINED HERE ##

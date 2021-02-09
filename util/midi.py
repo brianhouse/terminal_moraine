@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, time, threading, atexit, queue, rtmidi
+import sys, time, threading, queue, rtmidi
 from rtmidi.midiconstants import NOTE_ON, NOTE_OFF, CONTROLLER_CHANGE
 
 class MidiOut(threading.Thread):
