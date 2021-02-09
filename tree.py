@@ -1,6 +1,7 @@
 import time, threading, math
 from random import random, randint
 
+
 class Leaf():
 
     number = 0
@@ -37,20 +38,25 @@ class Limb():
         self.angle = angle
         self.start = self.parent.end if self.parent else Tree.ORIGIN
         self.end = self.start
+        self.water = 0
+        self.tree.limbs.append(self)
 
     def grow(self, day):
         if self.leaf:
             self.leaf.intensity = leaf_function(day, self.leaf.id)
-        if len(self.tree.leaves) < Tree.MAX_LEAVES:
+        if self.size < Tree.MAX_TRUNK_SIZE:
             self.start = self.parent.end if self.parent else Tree.ORIGIN
             self.size += growth_function(day) * Tree.GROWTH_RATE
             self.end = get_point(self.start, self.angle, self.size)
-            if  self.leaf and \
+            if  len(self.tree.leaves) < Tree.MAX_LEAVES and \
+                len(self.tree.limbs) < Tree.MAX_LIMBS and \
+                self.leaf and \
                 self.size > Tree.BRANCH_MIN_SIZE and \
                 random() > Tree.BRANCH_PROB:
                 self.branch()
-        for child in self.children:
-            child.grow(day)
+            for child in self.children:
+                child.grow(day)
+
 
     ## TREE STRUCTURE IS DEFINED HERE ##
     def branch(self):
@@ -74,6 +80,7 @@ class Tree(threading.Thread):
             setattr(Tree, key, value)
         self.callback = callback
         self.leaves = []
+        self.limbs = []
         self.root = Limb(self)
         self.start()
 
@@ -92,7 +99,23 @@ class Tree(threading.Thread):
             start_t = stop_t
 
     def update(self, day):
+
+        # grow the tree
         self.root.grow(day)
+
+        # calculate water distribution in all the limbs
+        for limb in self.limbs:
+            limb.water = 0
+        for leaf in self.leaves:
+            limb = leaf.limb
+            while limb:
+                limb.water += 1
+                limb = limb.parent
+        root_water = self.root.water
+        for limb in self.limbs:
+            limb.water /= root_water
+
+        # call sonification function
         if self.callback:
             self.callback(self)
 

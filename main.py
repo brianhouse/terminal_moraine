@@ -13,8 +13,11 @@ midi_out.log_midi = False
 config = {
     'TICK_DURATION': 1/60,
     'TICKS_PER_YEAR': 50,
-    'MAX_LEAVES': 128,
     'GROWTH_RATE': .25,
+
+    'MAX_LEAVES': 128,
+    'MAX_LIMBS': 6,
+    'MAX_TRUNK_SIZE': 100,
 
     'WIDTH': 1000,
     'HEIGHT': 700,
@@ -33,24 +36,27 @@ config = {
 # also a control for leaf intensity
 # prints out branch structure below the leaf, not sure how to send it
 def sonify(tree):
-    for leaf in tree.leaves:
+    # for leaf in tree.leaves:
+    #
+    #     x, y = leaf.position
+    #     x = int((x / config['WIDTH']) * 127)
+    #     y = int((y / config['HEIGHT']) * 127)
+    #     intensity = int((leaf.intensity / 5) * 127)
+    #     midi_out.send_control(1, leaf.id, x)
+    #     midi_out.send_control(2, leaf.id, y)
+    #     midi_out.send_control(3, leaf.id, intensity)
+    #
+    #     structure = []
+    #     limb = leaf.limb
+    #     while limb:
+    #         structure.append(limb.id)
+    #         limb = limb.parent
+    #     structure.reverse()
+    #
+    #     print(leaf.id, structure, leaf.intensity)
 
-        x, y = leaf.position
-        x = int((x / config['WIDTH']) * 127)
-        y = int((y / config['HEIGHT']) * 127)
-        intensity = int((leaf.intensity / 5) * 127)
-        midi_out.send_control(1, leaf.id, x)
-        midi_out.send_control(2, leaf.id, y)
-        midi_out.send_control(3, leaf.id, intensity)
-
-        structure = []
-        limb = leaf.limb
-        while limb:
-            structure.append(limb.id)
-            limb = limb.parent
-        structure.reverse()
-
-        print(leaf.id, structure, leaf.intensity)
+    for limb in tree.limbs:
+        print(limb.id, limb.size, limb.water)
 
 
 
