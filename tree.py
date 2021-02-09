@@ -11,7 +11,7 @@ class Leaf():
         Leaf.number += 1
         self.tree = tree
         self.limb = limb
-        self.intensity = 0
+        self.intensity = 0   # controlled by leaf_function based on day of year
         self.tree.leaves.append(self)
 
     @property
@@ -30,28 +30,29 @@ class Limb():
     def __init__(self, tree, parent=None, angle=-90, leaf=None):
         self.id = Limb.number
         Limb.number += 1
-        self.tree = tree
-        self.parent = parent
-        self.children = []
-        self.leaf = Leaf(tree, self) if not leaf else leaf.move(self)
-        self.size = 0
-        self.angle = angle
-        self.start = self.parent.end if self.parent else Tree.ORIGIN
-        self.end = self.start
-        self.water = 0
+        self.tree = tree            # ref to tree object
+        self.parent = parent        # ref to parent limb
+        self.children = []          # ref to children limbs
+        self.leaf = Leaf(tree, self) if not leaf else leaf.move(self) # ref to leaf
+        self.length = 0             # length of limb
+        self.angle = angle          # angle of limb
+        self.start = self.parent.end if self.parent else Tree.ORIGIN    # coords of start point
+        self.end = self.start   # coords of end point
+        self.water = 0          # proportion of water that flows through this limb
+        self.percent = 0        # percentage of tree
         self.tree.limbs.append(self)
 
     def grow(self, day):
         if self.leaf:
             self.leaf.intensity = leaf_function(day, self.leaf.id)
-        if self.tree.root.size < Tree.MAX_ROOT_SIZE:
+        if self.tree.root.length < Tree.MAX_ROOT_LENGTH:
             self.start = self.parent.end if self.parent else Tree.ORIGIN
-            self.size += growth_function(day) * Tree.GROWTH_RATE
-            self.end = get_point(self.start, self.angle, self.size)
+            self.length += growth_function(day) * Tree.GROWTH_RATE
+            self.end = get_point(self.start, self.angle, self.length)
             if  len(self.tree.leaves) < Tree.MAX_LEAVES and \
                 len(self.tree.limbs) < Tree.MAX_LIMBS and \
                 self.leaf and \
-                self.size > Tree.BRANCH_MIN_SIZE and \
+                self.length > Tree.BRANCH_MIN_LENGTH and \
                 random() > Tree.BRANCH_PROB:
                 self.branch()
         for child in self.children:
@@ -82,14 +83,17 @@ class Tree(threading.Thread):
         self.leaves = []
         self.limbs = []
         self.root = Limb(self)
+        self.age = 0                    # age of tree in years
         self.start()
 
     def run(self):
         start_t = time.time()
         ticks = 0
         while True:
-            self.update(int((ticks / Tree.TICKS_PER_YEAR) * 365))
-            ticks = (ticks + 1) % Tree.TICKS_PER_YEAR
+            day = (self.age * 365) % 365
+            self.update(day)
+            ticks += 1
+            self.age = ticks / Tree.TICKS_PER_YEAR
             time.sleep(Tree.TICK_DURATION)
             stop_t = time.time()
             elapsed = stop_t - start_t
@@ -104,15 +108,19 @@ class Tree(threading.Thread):
         self.root.grow(day)
 
         # calculate water distribution in all the limbs
+        # calculate percentage of the tree of each limb
         for limb in self.limbs:
             limb.water = 0
+        tree_water = 0
         for leaf in self.leaves:
             limb = leaf.limb
             while limb:
                 limb.water += 1
+                tree_water += 1
                 limb = limb.parent
         root_water = self.root.water
         for limb in self.limbs:
+            limb.percent = limb.water / tree_water
             limb.water /= root_water
 
         # call sonification function

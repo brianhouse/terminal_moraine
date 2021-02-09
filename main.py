@@ -11,20 +11,23 @@ midi_out.log_midi = False
 
 
 config = {
+    # time
     'TICK_DURATION': 1/60,
     'TICKS_PER_YEAR': 50,
-    'GROWTH_RATE': .25,
+    'GROWTH_RATE': .25,     # not sure what the units are here
 
+    # size
     'MAX_LEAVES': 128,
     'MAX_LIMBS': 128,
-    'MAX_ROOT_SIZE': 100,
+    'MAX_ROOT_LENGTH': 100,
 
+    # canvas
     'WIDTH': 1000,
     'HEIGHT': 700,
-
     'ORIGIN': (500, 700),
 
-    'BRANCH_MIN_SIZE': 10,
+    # dynamics
+    'BRANCH_MIN_LENGTH': 10,    # min length before branching
     'BRANCH_PROB': .75,
     }
 
@@ -57,7 +60,7 @@ def sonify(tree):
 
     # show "water" distributed through limbs
     # for limb in tree.limbs:
-    #     print("limb", limb.id, limb.size, limb.water)
+    #     print("limb", limb.id, limb.length, limb.water, limb.percentage)
 
 
 
