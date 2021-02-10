@@ -12,6 +12,7 @@ class Leaf():
         self.tree = tree
         self.limb = limb
         self.intensity = 0   # controlled by leaf_function based on day of year
+        self.maturity = 0    # fades in from 0-1 when leaf first appears
         self.tree.leaves.append(self)
 
     @property
@@ -112,9 +113,11 @@ class Tree(threading.Thread):
         for limb in self.limbs:
             limb.load = 0
         for leaf in self.leaves:
+            if leaf.maturity < 1:
+                leaf.maturity += Tree.BUD_SPEED
             limb = leaf.limb
             while limb:
-                limb.load += 1
+                limb.load += leaf.maturity
                 limb = limb.parent
         for limb in self.limbs:
             limb.water = limb.load / self.root.load

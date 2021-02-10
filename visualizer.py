@@ -9,7 +9,7 @@ def draw(limb):
     for child in limb.children:
         draw(child)
     if limb.leaf:
-        ctx.circle(*limb.leaf.position, 5 * limb.leaf.intensity, (0, 150, 20))
+        ctx.circle(*limb.leaf.position, 5 * limb.leaf.maturity, (0, 150, 20))
 
 def start(tree):
     def loop():

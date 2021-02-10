@@ -29,6 +29,7 @@ config = {
     # dynamics
     'BRANCH_MIN_LENGTH': 10,    # min length before branching
     'BRANCH_PROB': .75,
+    'BUD_SPEED': 1/64,
     }
 
 

@@ -30,24 +30,30 @@ config = {
     # dynamics
     'BRANCH_MIN_LENGTH': 10,    # min length before branching
     'BRANCH_PROB': .75,
+    'BUD_SPEED': 1/10,
     }
 
 
 def sonify(tree):
-    for limb in tree.limbs:
-        # print("limb", limb.id, limb.water, limb.percent)
-        rate = limb.load / config['MAX_LIMBS']  # it's not really max_limbs, just expected leaves
-        rate *= 1.5
-        phase = limb.id * (1 / config['MAX_LIMBS'])
-        gain = limb.load / config['MAX_LIMBS']
-        # pos_x = (limb.end[0] - config['ORIGIN'][0]) / (config['WIDTH'] / 2)
-        # pos_y = (limb.end[1] - config['ORIGIN'][1]) / (config['HEIGHT'] / 2)
-        pan = ((limb.id / (config['MAX_LIMBS'] - 1)) * 2) - 1
-        pos_x = (random() * 2) - 1
-        pos_y = 0
+    for l in range(config['MAX_LIMBS']):
+        if l < len(tree.limbs):
+            limb = tree.limbs[l]
+            # print("limb", limb.id, limb.water, limb.percent)
+            load = max(limb.load, 1)    # prevent rate swoops from 0
+            rate = load / min(config['MAX_LIMBS'], config['MAX_LEAVES']) # current vs max possible load
+            rate *= 1.5                 # master pitch adjust
+            phase = limb.id * (1 / config['MAX_LIMBS']) # distribute the phasing
+            gain = limb.load / config['MAX_LIMBS']      # keep total gain below unity
+            # pos_x = (limb.end[0] - config['ORIGIN'][0]) / (config['WIDTH'] / 2)
+            # pos_y = (limb.end[1] - config['ORIGIN'][1]) / (config['HEIGHT'] / 2)
+            pan = ((limb.id / (config['MAX_LIMBS'] - 1)) * 2) - 1
+            pos_x = (random() * 2) - 1
+            pos_y = 0
 
-        # id, rate, phase, gain, pos_x, pos_y
-        osc_out.send("limb/", [limb.id, rate, phase, gain, pos_x, pos_y])
-
+            # id, rate, phase, gain, pos_x, pos_y
+            osc_out.send("limb/", [l, rate, phase, gain, pos_x, pos_y])
+        else:
+            # zero out all uncreated limbs to avoid having to hit reset
+            osc_out.send("limb/", [l, 0, 0, 0, 0, 0])
 
 visualizer.start(Tree(config, sonify))
