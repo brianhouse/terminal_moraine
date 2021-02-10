@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ -279.0, -797.0, 953.0, 762.0 ],
+		"rect" : [ 0.0, 53.0, 953.0, 702.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -236,7 +236,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 660.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -248,7 +248,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 630.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -260,7 +260,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 600.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -272,7 +272,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 570.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -284,7 +284,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 540.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -296,7 +296,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 510.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -308,7 +308,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 480.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -320,7 +320,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 450.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -627,7 +627,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 423.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -639,7 +639,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 393.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -651,7 +651,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 363.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -663,7 +663,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 333.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -675,7 +675,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 303.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -687,7 +687,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 273.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -699,7 +699,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 243.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}
@@ -711,7 +711,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "float", "" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 411.0, 213.0, 31.0, 22.0 ],
 					"text" : "limb"
 				}

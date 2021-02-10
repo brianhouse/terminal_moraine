@@ -36,9 +36,10 @@ config = {
 def sonify(tree):
     for limb in tree.limbs:
         # print("limb", limb.id, limb.water, limb.percent)
-        rate = limb.water
+        rate = limb.load / config['MAX_LIMBS']  # it's not really max_limbs, just expected leaves
+        rate *= 1.5
         phase = limb.id * (1 / config['MAX_LIMBS'])
-        gain = limb.percent
+        gain = limb.load / config['MAX_LIMBS']
         # pos_x = (limb.end[0] - config['ORIGIN'][0]) / (config['WIDTH'] / 2)
         # pos_y = (limb.end[1] - config['ORIGIN'][1]) / (config['HEIGHT'] / 2)
         pan = ((limb.id / (config['MAX_LIMBS'] - 1)) * 2) - 1

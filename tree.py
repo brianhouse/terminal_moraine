@@ -38,8 +38,9 @@ class Limb():
         self.angle = angle          # angle of limb
         self.start = self.parent.end if self.parent else Tree.ORIGIN    # coords of start point
         self.end = self.start   # coords of end point
-        self.water = 0     # proportion of water that flows through this limb, based on number of leaves supported
-        self.percent = 0   # percentage of tree, based on water
+        self.load = 0   # number of leaves supported by this limb or its children
+        self.water = 0     # proportion of water that flows through this limb
+        self.percent = 0   # percentage of overall tree mass
         self.tree.limbs.append(self)
 
     def grow(self, day):
@@ -107,17 +108,17 @@ class Tree(threading.Thread):
         # grow the tree
         self.root.grow(day)
 
-        # calculate water distribution and subsequent percent in all the limbs
+        # calculate leaf load, water distribution, and percent mass of all the limbs
         for limb in self.limbs:
-            limb.l = 0
+            limb.load = 0
         for leaf in self.leaves:
             limb = leaf.limb
             while limb:
-                limb.l += 1
+                limb.load += 1
                 limb = limb.parent
         for limb in self.limbs:
-            limb.water = limb.l / self.root.l
-            limb.percent = limb.l / sum([limb.l for limb in self.limbs])
+            limb.water = limb.load / self.root.load
+            limb.percent = limb.load / sum([limb.load for limb in self.limbs])
 
         # call sonification function
         if self.callback:
