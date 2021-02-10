@@ -61,7 +61,7 @@ class Limb():
 
     ## TREE STRUCTURE IS DEFINED HERE ##
     def branch(self):
-        if random() > 1/4:
+        if random() > 1/4 and len(self.tree.limbs) < Tree.MAX_LIMBS - 1:
             a = Limb(self.tree, self, self.angle + randint(-30, -20), self.leaf)
             b = Limb(self.tree, self, self.angle + randint(40, 50))
             self.children = [a, b]
@@ -117,7 +117,7 @@ class Tree(threading.Thread):
                 limb = limb.parent
         for limb in self.limbs:
             limb.water = limb.l / self.root.l
-            limb.percent = limb.l / len(self.leaves)
+            limb.percent = limb.l / sum([limb.l for limb in self.limbs])
 
         # call sonification function
         if self.callback:
