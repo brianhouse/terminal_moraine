@@ -28,7 +28,7 @@ class Limb():
 
     number = 0
 
-    def __init__(self, tree, parent=None, angle=-90, leaf=None):
+    def __init__(self, tree, parent=None, angle=-90, zangle=-90, leaf=None):
         self.id = Limb.number
         Limb.number += 1
         self.tree = tree            # ref to tree object
@@ -36,7 +36,8 @@ class Limb():
         self.children = []          # ref to children limbs
         self.leaf = Leaf(tree, self) if not leaf else leaf.move(self) # ref to leaf
         self.length = 0             # length of limb
-        self.angle = angle          # angle of limb
+        self.angle = angle          # x-y angle of limb (y is up)
+        self.zangle = zangle        # x-z angle of limb (z is out)
         self.start = self.parent.end if self.parent else Tree.ORIGIN    # coords of start point
         self.end = self.start   # coords of end point
         self.load = 0   # number of leaves supported by this limb or its children
@@ -50,7 +51,7 @@ class Limb():
         if self.tree.root.length < Tree.MAX_ROOT_LENGTH:
             self.start = self.parent.end if self.parent else Tree.ORIGIN
             self.length += growth_function(day) * Tree.GROWTH_RATE
-            self.end = get_point(self.start, self.angle, self.length)
+            self.end = get_point(self.start, self.angle, self.zangle, self.length)
             if  len(self.tree.leaves) < Tree.MAX_LEAVES and \
                 len(self.tree.limbs) < Tree.MAX_LIMBS and \
                 self.leaf and \
@@ -64,11 +65,11 @@ class Limb():
     ## TREE STRUCTURE IS DEFINED HERE ##
     def branch(self):
         if random() > 1/4 and len(self.tree.limbs) < Tree.MAX_LIMBS - 1:
-            a = Limb(self.tree, self, self.angle + randint(-30, -20), self.leaf)
-            b = Limb(self.tree, self, self.angle + randint(40, 50))
+            a = Limb(self.tree, self, self.angle + randint(-30, -20), self.angle + randint(-30, -20), self.leaf)
+            b = Limb(self.tree, self, self.angle + randint(40, 50), self.zangle + randint(40, 50))
             self.children = [a, b]
         else:
-            a = Limb(self.tree, self, self.angle + randint(-50, -40), self.leaf)
+            a = Limb(self.tree, self, self.angle + randint(-50, -40), self.zangle + randint(-50, -40), self.leaf)
             self.children = [a]
         self.leaf = None
 
@@ -148,6 +149,8 @@ def leaf_function(day, n):
     else:
         return (day - 50) / 200
 
-def get_point(start_point, angle, distance):
-    x, y = start_point
-    return x + (distance * math.cos(math.radians(angle))), y + (distance * math.sin(math.radians(angle)))
+def get_point(start_point, angle, zangle, distance):
+    x, y, z = start_point
+    return  x + (distance * math.sin(math.radians(zangle)) * math.cos(math.radians(angle))),\
+            y + (distance * math.sin(math.radians(angle))),\
+            z + (distance * math.cos(math.radians(zangle)) * math.cos(math.radians(angle)))

@@ -5,17 +5,15 @@ from tree import Tree
 from util.osc import osc_out
 from random import random
 
-osc_out.log_osc = True
-# receive OSC on port 23232
-# format:
-# osc_out.send(address, message)
+# osc is on port 5005
+osc_out.log_osc = False
 
 
 config = {
     # time
     'TICK_DURATION': 1/60,
     'TICKS_PER_YEAR': 50,
-    'GROWTH_RATE': 1/16,     # not sure what the units are here
+    'GROWTH_RATE': 1/4,     # not sure what the units are here
 
     # size
     'MAX_LEAVES': 127,
@@ -25,7 +23,7 @@ config = {
     # canvas
     'WIDTH': 1000,
     'HEIGHT': 700,
-    'ORIGIN': (500, 700),
+    'ORIGIN': (300, 300, 300),
 
     # dynamics
     'BRANCH_MIN_LENGTH': 10,    # min length before branching
