@@ -115,6 +115,8 @@ class Tree(threading.Thread):
         for leaf in self.leaves:
             if leaf.maturity < 1:
                 leaf.maturity += Tree.BUD_SPEED
+                if leaf.maturity > 1:
+                    leaf.maturity = 1
             limb = leaf.limb
             while limb:
                 limb.load += leaf.maturity
