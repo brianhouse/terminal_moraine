@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 227.0, 95.0, 915.0, 596.0 ],
+		"rect" : [ 191.0, 87.0, 915.0, 596.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -93,7 +93,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 497.0, 359.0, 58.0, 22.0 ],
+					"patching_rect" : [ 499.0, 330.0, 58.0, 22.0 ],
 					"text" : "loadbang"
 				}
 
@@ -115,8 +115,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 637.0, 399.0, 150.0, 20.0 ],
-					"text" : "disintegration control"
+					"patching_rect" : [ 664.0, 406.0, 150.0, 20.0 ],
+					"text" : "solid  <---> disintegrating"
 				}
 
 			}
@@ -190,8 +190,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 247.0, 399.0, 150.0, 20.0 ],
-					"text" : "elongation control"
+					"patching_rect" : [ 277.0, 406.0, 150.0, 20.0 ],
+					"text" : "deep ice <---> surface ice"
 				}
 
 			}
@@ -501,8 +501,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "signal" ],
-					"patching_rect" : [ 89.0, 139.0, 84.0, 22.0 ],
-					"text" : "poly~ grain 16"
+					"patching_rect" : [ 89.0, 139.0, 92.0, 22.0 ],
+					"text" : "poly~ crystal 16"
 				}
 
 			}
@@ -785,7 +785,7 @@
 			}
  ],
 		"dependency_cache" : [ 			{
-				"name" : "grain.maxpat",
+				"name" : "crystal.maxpat",
 				"bootpath" : "~/Studio/terminal_morraine/code/ice_max",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",

@@ -17,7 +17,7 @@ config = {
 
     # size
     'MAX_LEAVES': 127,
-    'MAX_LIMBS': 16,
+    'MAX_LIMBS': 127,
     'MAX_ROOT_LENGTH': 100,
 
     # canvas
@@ -45,13 +45,13 @@ def sonify(tree):
             # pos_x = (limb.end[0] - config['ORIGIN'][0]) / (config['WIDTH'] / 2)
             # pos_y = (limb.end[1] - config['ORIGIN'][1]) / (config['HEIGHT'] / 2)
             pan = ((limb.id / (config['MAX_LIMBS'] - 1)) * 2) - 1
-            pos_x = (random() * 2) - 1
-            pos_y = 0
 
-            osc_out.send("limb/", [l, rate, phase, gain, pos_x, pos_y])
+            x, y, z = limb.end
+            # print(l, "\t", int(x), int(y), int(z))
+            # osc_out.send("limb/", [l, rate, phase, gain, pos_x, pos_y])
         else:
             # zero out all uncreated limbs to avoid having to hit reset
-            osc_out.send("limb/", [l, 0, 0, 0, 0, 0])
+            # osc_out.send("limb/", [l, 0, 0, 0, 0, 0])
             pass
 
 visualizer.start(Tree(config, sonify))

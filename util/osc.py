@@ -29,4 +29,4 @@ class OSCOut(threading.Thread):
             if self.throttle > 0:
                 time.sleep(self.throttle)
 
-# osc_out = OSCOut(5005)
+osc_out = OSCOut(5005)
