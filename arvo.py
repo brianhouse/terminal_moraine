@@ -14,7 +14,7 @@ config = {
     # time
     'TICK_DURATION': 1/60,
     'TICKS_PER_YEAR': 50,
-    'GROWTH_RATE': 1/4,     # not sure what the units are here
+    'GROWTH_RATE': 1/16,     # not sure what the units are here
 
     # size
     'MAX_LEAVES': 127,
