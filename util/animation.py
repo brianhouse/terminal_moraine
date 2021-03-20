@@ -17,6 +17,7 @@ class Context():
         style = pyglet.window.Window.WINDOW_STYLE_DEFAULT
         self.window = pyglet.window.Window(config=config, width=self.width, height=self.height, resizable=False, caption=title, style=style)
         self.objects = []
+        self.labels = []
         pyglet.gl.glClearColor(1.0, 1.0, 1.0, 1.0)
 
     def start(self, draw_f):
@@ -28,9 +29,12 @@ class Context():
     def on_draw(self):
         self.window.clear()
         self.objects.clear()
+        self.labels = []
         self.batch = pyglet.graphics.Batch()
         lines = self.draw_f()
         self.batch.draw()
+        for label in self.labels:
+            label.draw()
         fps = pyglet.clock.get_fps()
 
     def update(self, dt):
@@ -48,8 +52,10 @@ class Context():
             segments = max(segments, 1)
         self.objects.append(pyglet.shapes.Circle(x, y, radius, segments=segments, color=color, batch=self.batch))
 
-
-
+    def text(self, s, x, y, size=5, color=(0, 0, 0, 255)):
+        y = self.height - y
+        label = pyglet.text.Label(s, font_name='monospace', font_size=size, x=x, y=y, anchor_x='center', anchor_y='center', color=color)
+        self.labels.append(label)
 
 if __name__ == "__main__":
     ctx = Context(800, 600)

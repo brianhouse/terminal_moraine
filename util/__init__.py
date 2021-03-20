@@ -22,3 +22,9 @@ def normalize(signal, minimum=None, maximum=None):
     signal /= maximum
     signal = np.clip(signal, 0.0, 1.0)
     return signal
+
+def rescale(v, in_min, in_max, out_min, out_max):
+    return (((v - in_min) / (in_max - in_min)) * (out_max - out_min)) + out_min
+
+def clip(v, min_v, max_v):
+    return min(max(v, min_v), max_v)

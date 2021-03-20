@@ -64,32 +64,14 @@ class Limb():
 
     ## TREE STRUCTURE IS DEFINED HERE ##
     def branch(self):
-        # if random() > 1/4 and len(self.tree.limbs) < Tree.MAX_LIMBS - 1:
-
-        # a = Limb(self.tree, self, self.angle + -45, self.zangle, self.leaf)
-        # b = Limb(self.tree, self, self.angle + 45, self.zangle)
-
-        # a = Limb(self.tree, self, self.angle, self.zangle + -45, self.leaf)
-        # b = Limb(self.tree, self, self.angle, self.zangle + 45)
-
-        ## need the ability to branch just at the end
-
-        if self == self.tree.root:
-            if random() < .05 and len(self.children) < 3:
-                if len(self.children) == 2:
-                    b = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60), self.leaf)
-                    self.leaf = None
-                else:
-                    b = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60))
-                self.children.append(b)
+        if self.leaf.id == 0:
+            b1 = Limb(self.tree, self, self.angle + randint(-20, 20), self.zangle + randint(-20, 20), self.leaf) # keep trunk relatively straight
+            b2 = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60))
         else:
             b1 = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60), self.leaf)
             b2 = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60))
-            self.leaf = None
-            self.children.append(b1)
-            self.children.append(b2)
-
-
+        self.leaf = None
+        self.children = [b1, b2]
 
 
 class Tree(threading.Thread):

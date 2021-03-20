@@ -3,6 +3,7 @@
 import visualizer
 from tree import Tree
 from util.osc import osc_out
+from util import rescale, clip
 from random import random
 
 # osc is on port 5005
@@ -21,8 +22,9 @@ config = {
     'MAX_ROOT_LENGTH': 100,
 
     # canvas
-    'WIDTH': 1000,
-    'HEIGHT': 700,
+    'WIDTH': 600,
+    'HEIGHT': 600,
+    'DEPTH': 600,
     'ORIGIN': (300, 300, 300),
 
     # dynamics
@@ -32,26 +34,26 @@ config = {
     }
 
 
+
+
 def sonify(tree):
     for l in range(config['MAX_LIMBS']):
         if l < len(tree.limbs):
             limb = tree.limbs[l]
-            # print("limb", limb.id, limb.water, limb.percent)
             load = max(limb.load, 1)    # prevent rate swoops from 0
             rate = 20 / load # current vs max possible load
             # rate *= 1.5                 # master pitch adjust
             phase = limb.id * (1 / config['MAX_LIMBS']) # distribute the phasing
             gain = limb.load / config['MAX_LIMBS']      # keep total gain below unity
-            # pos_x = (limb.end[0] - config['ORIGIN'][0]) / (config['WIDTH'] / 2)
-            # pos_y = (limb.end[1] - config['ORIGIN'][1]) / (config['HEIGHT'] / 2)
-            pan = ((limb.id / (config['MAX_LIMBS'] - 1)) * 2) - 1
 
-            x, y, z = limb.end
-            # print(l, "\t", int(x), int(y), int(z))
-            # osc_out.send("limb/", [l, rate, phase, gain, pos_x, pos_y])
+            # y is up internally; swapping with z here
+            pos_x = clip(rescale(limb.end[0], 50, 550, -1, 1), -1, 1)
+            pos_y = clip(rescale(limb.end[2], 50, 550, 1, -1), -1, 1)
+            pos_z = clip(rescale(limb.end[1], 50, 550, 1, -1), -1, 1)
+
+            osc_out.send("limb/", [l, rate, phase, gain, pos_x, pos_y, pos_z])
         else:
             # zero out all uncreated limbs to avoid having to hit reset
-            # osc_out.send("limb/", [l, 0, 0, 0, 0, 0])
-            pass
+            osc_out.send("limb/", [l, 0, 0, 0, 0, 0])
 
 visualizer.start(Tree(config, sonify))
