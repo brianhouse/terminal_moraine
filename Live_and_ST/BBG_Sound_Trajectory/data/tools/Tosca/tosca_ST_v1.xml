@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<tosca version="0.4">
+	<parameter index="1" name="index" min="0" max="1" scaling="linear"/> 
+	<parameter index="2" name="mode" min="0" max="1" scaling="linear"/>
+    <parameter index="3" name="x" min="0" max="1" scaling="linear"/>
+    <parameter index="4" name="y" min="0" max="1" scaling="linear"/>
+    <parameter index="5" name="z" min="0" max="1" scaling="linear"/>
+    <parameter index="6" name="a" min="0" max="1" scaling="linear"/>
+    <parameter index="7" name="e" min="0" max="1" scaling="linear"/>
+    <parameter index="8" name="d" min="0" max="1" scaling="linear"/>
+</tosca>

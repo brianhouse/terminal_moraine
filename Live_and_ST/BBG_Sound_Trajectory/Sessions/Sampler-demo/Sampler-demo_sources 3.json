@@ -1,0 +1,20 @@
+{
+	"pattrstorage" : 	{
+		"name" : "SOURCES",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"main-sources::source-list::source.slot-1::geo" : [ 0, 0, 0 ],
+					"main-sources::source-list::source.slot-1::index" : [ 1 ],
+					"main-sources::source-list::source.slot-2::geo" : [ 0, 0, 0 ],
+					"main-sources::source-list::source.slot-2::index" : [ 2 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}

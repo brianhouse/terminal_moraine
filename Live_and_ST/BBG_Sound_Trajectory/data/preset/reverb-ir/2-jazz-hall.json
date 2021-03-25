@@ -1,0 +1,33 @@
+{
+	"pattrstorage" : 	{
+		"name" : "IR-reverb",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"IR-FILE[1]" : [ "24-CONCERT-Jazzhall-IR.wav" ],
+					"IR-FILE[3]" : [ "24-CONCERT-Jazzhall-IR.wav" ],
+					"IR-FILE[2]" : [ "24-CONCERT-Jazzhall-IR.wav" ],
+					"decay::decay" : [ 100.0 ],
+					"gain::gain" : [ -12.0 ],
+					"predelay::predelay" : [ 10.0 ],
+					"ir_eq::EQ Frequency Display" : [  ],
+					"ir_eq::EQ Hi Freq" : [ 10000.0 ],
+					"ir_eq::EQ Hi Gain" : [ 0.0 ],
+					"ir_eq::EQ Hi S" : [ 1.0 ],
+					"ir_eq::EQ Lo Freq" : [ 100.0 ],
+					"ir_eq::EQ Lo Gain" : [ 0.0 ],
+					"ir_eq::EQ Lo S" : [ 1.0 ],
+					"ir_eq::EQ Mid Freq" : [ 1000.0 ],
+					"ir_eq::EQ Mid Gain" : [ 0.0 ],
+					"ir_eq::EQ Mid Q" : [ 0.71 ],
+					"ir_eq::live.text" : [ 0.0 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}

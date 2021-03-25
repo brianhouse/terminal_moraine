@@ -1,0 +1,40 @@
+{
+	"pattrstorage" : 	{
+		"name" : "SOURCES",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"main-sources::source-list::source.slot-1::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-1::index" : [ 1 ],
+					"main-sources::source-list::source.slot-12::geo" : [ 0.0, 0.0, 0.0 ],
+					"main-sources::source-list::source.slot-12::index" : [ 12 ],
+					"main-sources::source-list::source.slot-11::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-11::index" : [ 11 ],
+					"main-sources::source-list::source.slot-10::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-10::index" : [ 10 ],
+					"main-sources::source-list::source.slot-9::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-9::index" : [ 9 ],
+					"main-sources::source-list::source.slot-8::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-8::index" : [ 8 ],
+					"main-sources::source-list::source.slot-7::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-7::index" : [ 7 ],
+					"main-sources::source-list::source.slot-6::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-6::index" : [ 6 ],
+					"main-sources::source-list::source.slot-5::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-5::index" : [ 5 ],
+					"main-sources::source-list::source.slot-4::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-4::index" : [ 4 ],
+					"main-sources::source-list::source.slot-3::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-3::index" : [ 3 ],
+					"main-sources::source-list::source.slot-2::geo" : [ 0 ],
+					"main-sources::source-list::source.slot-2::index" : [ 2 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}

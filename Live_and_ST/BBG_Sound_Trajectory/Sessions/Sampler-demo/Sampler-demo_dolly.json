@@ -1,0 +1,209 @@
+{
+	"pattrstorage" : 	{
+		"name" : "dolly",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"name" : "Sampler-Demo",
+				"data" : 				{
+					"listener-mode" : [ 0 ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 1 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [ 5.0 ],
+					"lens_angle::lens angle" : [ 80.0 ]
+				}
+
+			}
+,
+			"2" : 			{
+				"id" : 2,
+				"name" : "boule",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 1 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"3" : 			{
+				"id" : 3,
+				"name" : "toupie",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 1 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"4" : 			{
+				"id" : 4,
+				"name" : "toupie",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 1 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"5" : 			{
+				"id" : 5,
+				"name" : "Atome",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 1 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"6" : 			{
+				"id" : 6,
+				"name" : "in-line",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 1 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"7" : 			{
+				"id" : 7,
+				"name" : "Random",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 1 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"8" : 			{
+				"id" : 8,
+				"name" : "Listener-Dolly",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 7 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"9" : 			{
+				"id" : 9,
+				"name" : "clap-test",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 7 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+,
+			"10" : 			{
+				"id" : 10,
+				"name" : "cloche-test",
+				"data" : 				{
+					"listener-mode" : [  ],
+					"listener.position::auto-lookat" : [ 0 ],
+					"listener.position::pos-x" : [ 0.0 ],
+					"listener.position::pos-y" : [ 0.0 ],
+					"listener.position::pos-z" : [ 0.0 ],
+					"listener.position::rot-x" : [ 0.0 ],
+					"listener.position::rot-y" : [ 0.0 ],
+					"listener.position::rot-z" : [ 0.0 ],
+					"listener.dolly::path-select" : [ 7 ],
+					"listener.dolly::DOLLY-pos" : [ 0.0 ],
+					"up::up view" : [  ],
+					"lens_angle::lens angle" : [  ]
+				}
+
+			}
+
+		}
+
+	}
+
+}

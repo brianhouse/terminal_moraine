@@ -1,0 +1,76 @@
+{
+	"pattrstorage" : 	{
+		"name" : "audio-mix",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"SAMPLER::level" : [ 0.0 ],
+					"AUX-render::mute" : [ 0 ],
+					"AUX-render::vol::level" : [ 0.0 ],
+					"AUX-render::slot-vst::vst-1::plugname" : [ 0 ],
+					"AUX-render::slot-vst::vst-1::enable" : [ 1 ],
+					"AUX-render::slot-vst::vst-1::params" : [ 0.0, 0.0, 0.0, 0.0 ],
+					"AUX-render::slot-vst::vst-2::plugname" : [ 0 ],
+					"AUX-render::slot-vst::vst-2::enable" : [ 1 ],
+					"AUX-render::slot-vst::vst-2::params" : [ 0.0, 0.0, 0.0, 0.0 ],
+					"AUX-render::slot-vst::vst-4::plugname" : [ 0 ],
+					"AUX-render::slot-vst::vst-4::enable" : [ 1 ],
+					"AUX-render::slot-vst::vst-4::params" : [ 0.0, 0.0, 0.0, 0.0 ],
+					"AUX-render::slot-vst::vst-3::plugname" : [ 0 ],
+					"AUX-render::slot-vst::vst-3::enable" : [ 1 ],
+					"AUX-render::slot-vst::vst-3::params" : [ 0.0, 0.0, 0.0, 0.0 ],
+					"SPEAKER::level" : [ 1.0 ],
+					"SPEAKER::mute" : [ 0 ],
+					"SPEAKER::sub::level" : [ 1.0 ],
+					"MIX::level" : [ 0.0 ],
+					"MIX::mute" : [ 0 ],
+					"audio-engine-feature::space-designer" : [ -1 ],
+					"audio-engine-feature::mode" : [ 0 ],
+					"audio-engine-feature::room-design-deph" : [ 100.0 ],
+					"audio-engine-feature::room-design-height" : [ 50.0 ],
+					"audio-engine-feature::room-design-offset" : [ 50.0 ],
+					"audio-engine-feature::room-design-width" : [ 100.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_dry::attn_limit" : [ 0.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_dry::center_att" : [ 0.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_dry::center_size" : [ 0.1 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_dry::limit" : [ 1000 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_dry::mode" : [ 0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_dry::pow-in" : [ 0.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_dry::pow-out" : [ 0.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_wet::attn_limit" : [ -48.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_wet::center_att" : [ -120.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_wet::center_size" : [ 250.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_wet::limit" : [ 1000 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_wet::mode" : [ 1 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_wet::pow-in" : [ 0.0 ],
+					"audio-engine-feature::attenuation-dry-wet::attn_mode::attn_wet::pow-out" : [ 0.0 ],
+					"audio-engine-feature::size-scene-real::real" : [ 20.0 ],
+					"audio-engine-feature::doppler::doppler" : [ 0.0 ],
+					"audio-engine-feature::REVERB_IR::IR-FILE" : [ "22-CONCERT-Concert-Hall-IR.wav" ],
+					"audio-engine-feature::REVERB_IR::decay::decay" : [ 100.0 ],
+					"audio-engine-feature::REVERB_IR::gain::gain" : [ -12.0 ],
+					"audio-engine-feature::REVERB_IR::predelay::predelay" : [ 20.0 ],
+					"audio-engine-feature::REVERB_IR::scale::scale" : [ 100.0 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Frequency Display" : [  ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Hi Freq" : [ 10000.0 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Hi Gain" : [ 0.0 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Hi S" : [ 1.0 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Lo Freq" : [ 97.729344999999981 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Lo Gain" : [ 0.063158 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Lo S" : [ 1.0 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Mid Freq" : [ 1023.234115999999744 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Mid Gain" : [ 0.063158 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ Mid Q" : [ 1.0 ],
+					"audio-engine-feature::REVERB_IR::ir_eq::EQ_on" : [ 0.0 ],
+					"audio-engine-feature::size-scene-virtual::virtual" : [ 20.0 ],
+					"audio-engine-feature::air::air absorption" : [ 50.0 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}

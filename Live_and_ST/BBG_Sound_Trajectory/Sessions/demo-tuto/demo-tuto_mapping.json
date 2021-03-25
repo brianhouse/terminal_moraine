@@ -1,0 +1,18 @@
+{
+	"pattrstorage" : 	{
+		"name" : "mapping",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"panel-event::nb_event" : [ 0 ],
+					"panel-analyser::nb_anal" : [ 0 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}

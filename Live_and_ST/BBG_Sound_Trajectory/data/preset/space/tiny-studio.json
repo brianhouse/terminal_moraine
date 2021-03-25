@@ -1,0 +1,65 @@
+{
+	"pattrstorage" : 	{
+		"name" : "space-designer[1]",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"mode" : [ 0 ],
+					"resolution" : [ 1 ],
+					"reverb-type" : [ 1 ],
+					"room-design-deph" : [ 100.0 ],
+					"room-design-height" : [ 50.0 ],
+					"room-design-offset" : [ 50.0 ],
+					"room-design-width" : [ 100.0 ],
+					"attenuation-dry-wet::attn_dry::attn_limit" : [ -120.0 ],
+					"attenuation-dry-wet::attn_dry::center_att" : [ 0.0 ],
+					"attenuation-dry-wet::attn_dry::center_size" : [ 0.1 ],
+					"attenuation-dry-wet::attn_dry::limit" : [ 1000 ],
+					"attenuation-dry-wet::attn_dry::mode" : [ 0 ],
+					"attenuation-dry-wet::attn_dry::pow-in" : [ -1.0 ],
+					"attenuation-dry-wet::attn_dry::pow-out" : [ -1.0 ],
+					"attenuation-dry-wet::attn_wet::attn_limit" : [ -120.0 ],
+					"attenuation-dry-wet::attn_wet::center_att" : [ -6.0 ],
+					"attenuation-dry-wet::attn_wet::center_size" : [ 100.0 ],
+					"attenuation-dry-wet::attn_wet::limit" : [ 1000 ],
+					"attenuation-dry-wet::attn_wet::mode" : [ 0 ],
+					"attenuation-dry-wet::attn_wet::pow-in" : [ -1.0 ],
+					"attenuation-dry-wet::attn_wet::pow-out" : [ -1.0 ],
+					"size-scene-real::real" : [ 1.0 ],
+					"doppler::doppler" : [ 10.0 ],
+					"reverb::roomsize::roomsize" : [ 10.0 ],
+					"reverb::revtime::revtime" : [ 2.5 ],
+					"reverb::bandwidth::bandwidth" : [ 0.5 ],
+					"reverb::early::early" : [ 0.5 ],
+					"reverb::tail::tail" : [ 0.2 ],
+					"reverb::gain::gain" : [ 0.25 ],
+					"REVERB_IR::IR-reverb" : [ -1 ],
+					"REVERB_IR::IR-FILE" : [ "48-STUDIO-Close-IR.wav" ],
+					"REVERB_IR::decay::decay" : [ 100.0 ],
+					"REVERB_IR::gain::gain" : [ -12.0 ],
+					"REVERB_IR::predelay::predelay" : [ 5.0 ],
+					"REVERB_IR::scale::scale" : [ 100.0 ],
+					"REVERB_IR::ir_eq::EQ Frequency Display" : [  ],
+					"REVERB_IR::ir_eq::EQ Hi Freq" : [ 10000.0 ],
+					"REVERB_IR::ir_eq::EQ Hi Gain" : [ 0.0 ],
+					"REVERB_IR::ir_eq::EQ Hi S" : [ 1.0 ],
+					"REVERB_IR::ir_eq::EQ Lo Freq" : [ 100.0 ],
+					"REVERB_IR::ir_eq::EQ Lo Gain" : [ 0.0 ],
+					"REVERB_IR::ir_eq::EQ Lo S" : [ 1.0 ],
+					"REVERB_IR::ir_eq::EQ Mid Freq" : [ 1000.0 ],
+					"REVERB_IR::ir_eq::EQ Mid Gain" : [ 0.0 ],
+					"REVERB_IR::ir_eq::EQ Mid Q" : [ 1.0 ],
+					"REVERB_IR::ir_eq::EQ_on" : [ 1.0 ],
+					"size-scene-virtual::virtual" : [ 1.0 ],
+					"air::air absorption" : [ 50.0 ],
+					"speed::speed sound" : [ 340.290009 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}
