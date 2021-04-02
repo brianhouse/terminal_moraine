@@ -17,8 +17,8 @@ config = {
     'GROWTH_RATE': 1/16,     # not sure what the units are here
 
     # size
-    'MAX_LEAVES': 127,
-    'MAX_LIMBS': 127,
+    'MAX_LEAVES': 32,
+    'MAX_LIMBS': 32,
     'MAX_ROOT_LENGTH': 100,
 
     # canvas
@@ -51,9 +51,12 @@ def sonify(tree):
             pos_y = clip(rescale(limb.end[2], 50, 550, 1, -1), -1, 1)
             pos_z = clip(rescale(limb.end[1], 50, 550, 1, -1), -1, 1)
 
+            l += 1 # change to 1-index
             osc_out.send("limb/", [l, rate, phase, gain, pos_x, pos_y, pos_z])
         else:
             # zero out all uncreated limbs to avoid having to hit reset
-            osc_out.send("limb/", [l, 0, 0, 0, 0, 0])
+            l += 1 # change to 1-index
+            osc_out.send("limb/", [l, 0, 0, 0, 0, 0, 0])
+
 
 visualizer.start(Tree(config, sonify))
