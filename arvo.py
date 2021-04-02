@@ -18,7 +18,7 @@ config = {
 
     # size
     'MAX_LEAVES': 32,
-    'MAX_LIMBS': 32,
+    'MAX_LIMBS': 100,
     'MAX_ROOT_LENGTH': 100,
 
     # canvas
@@ -53,6 +53,7 @@ def sonify(tree):
 
             l += 1 # change to 1-index
             osc_out.send("limb/", [l, rate, phase, gain, pos_x, pos_y, pos_z])
+            print(l)
         else:
             # zero out all uncreated limbs to avoid having to hit reset
             l += 1 # change to 1-index
