@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 657.0, 607.0 ],
+		"rect" : [ 142.0, 121.0, 474.0, 607.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,18 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-4",
+					"maxclass" : "number",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 71.5, 198.0, 50.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-40",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -55,7 +67,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 212.0, 150.0, 213.0, 480.0 ],
+						"rect" : [ 212.0, 510.0, 213.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -117,7 +129,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 51.0, 382.0, 138.0, 22.0 ],
-									"text" : "udpsend 127.0.0.1 5005"
+									"text" : "udpsend 127.0.0.1 4002"
 								}
 
 							}
@@ -192,7 +204,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 168.0, 317.0, 63.0, 22.0 ],
-					"text" : "ICST"
+					"text" : "ST 94"
 				}
 
 			}
@@ -203,8 +215,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 76.5, 257.5, 29.5, 22.0 ],
-					"text" : "ST"
+					"patching_rect" : [ 76.5, 257.5, 40.0, 22.0 ],
+					"text" : "ST $1"
 				}
 
 			}
@@ -918,7 +930,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 438.0, 704.0, 640.0, 480.0 ],
+						"rect" : [ 438.0, 1064.0, 640.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2444,6 +2456,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-16", 2 ],
 					"source" : [ "obj-36", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-36", 0 ],
+					"source" : [ "obj-4", 0 ]
 				}
 
 			}
