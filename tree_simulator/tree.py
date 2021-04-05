@@ -67,22 +67,21 @@ class Limb():
     ## TREE STRUCTURE IS DEFINED HERE ##
     def branch(self):
         self.children = []
-
-        # axis = randint(-20, 20)
-        # spread = randint
-
         if self.leaf.id == 0:
-            b1 = Limb(self.tree, self, self.angle + randint(-20, 20), self.zangle + randint(-10, 10), self.leaf) # keep trunk relatively straight
-            b2 = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60))
-            self.children.append(b1)
-            self.children.append(b2)
-            if random() >= 0.5:
-                b3 = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60))
-                self.children.append(b3)
-        else:
-            b1 = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60), self.leaf)
-            b2 = Limb(self.tree, self, self.angle + randint(-60, 60), self.zangle + randint(-60, 60))
-            self.children = [b1, b2]
+            self.children.append(Limb(self.tree, self, self.angle + randint(-20, 20), self.zangle + randint(-10, 10), self.leaf)) # keep trunk relatively straight
+
+        axis = randint(-10, 10)
+        spread = randint(10, 100)
+        angle_1 = axis - spread/2
+        angle_2 = axis + spread/2
+
+        zaxis = randint(-10, 10)
+        zspread = randint(10, 100)
+        zangle_1 = zaxis - zspread/2
+        zangle_2 = zaxis + zspread/2
+
+        self.children.append(Limb(self.tree, self, self.angle + angle_1, self.zangle + zangle_1, self.leaf if self.leaf.id != 0 else None))
+        self.children.append(Limb(self.tree, self, self.angle + angle_2, self.zangle + zangle_2))
         self.leaf = None
 
 
