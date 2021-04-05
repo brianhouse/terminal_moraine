@@ -1,3 +1,0 @@
-python-rtmidi
-python-osc
-pyglet
