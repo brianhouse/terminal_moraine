@@ -26,7 +26,7 @@ class Limb():
 
     number = 0
 
-    def __init__(self, tree, parent=None, angle=-90, zangle=90, leaf=None):
+    def __init__(self, tree, parent=None, rotation=0, pitch=-90, leaf=None):
         self.id = Limb.number
         Limb.number += 1
         self.tree = tree            # ref to tree object
@@ -34,11 +34,13 @@ class Limb():
         self.children = []          # ref to children limbs
         self.leaf = Leaf(tree, self) if not leaf else leaf.move(self) # ref to leaf
         self.start = self.parent.end if self.parent else (0, 0, 0)    # coords of start point
-        self.end = self.start   # coords of end point
+        self.end = self.start       # coords of end point
         self.length = 0             # length of limb
-        self.angle = angle          # x-y angle of limb (y is up)
-        self.zangle = zangle        # x-z angle of limb (z is out)
-        self.load = 0   # number of leaves supported by this limb or its children
+
+        self.rotation = rotation    # rotation around y axis (y is up)
+        self.pitch = pitch          # angle above horiztonal
+
+        self.load = 0               # number of leaves supported by this limb or its children
         self.depth = 0
         parent = self.parent
         while parent is not None:
@@ -48,18 +50,15 @@ class Limb():
         self.tree.limbs.append(self)
 
     def grow(self, day):
-        # if self.tree.root.length >= Tree.MAX_ROOT_LENGTH:
-        #     return
         self.start = self.parent.end if self.parent else (0, 0, 0)
         if self.length < length_f(self.depth):
             self.length += (growth_f(day) + self.growth_variance) * Tree.LIMB_GROWTH_AMOUNT
-        self.end = get_point(self.start, self.angle, self.zangle, self.length)
-         # ... note that it might create more than 1
+        self.end = get_point(self.start, self.rotation, self.pitch, self.length)
         for child in self.children:
             child.grow(day)
         if self.leaf and \
-            len(self.tree.leaves) < Tree.MAX_LEAVES and \
-            len(self.tree.limbs) < Tree.MAX_LIMBS and \
+            len(self.tree.leaves) < Tree.MAX_LEAVES - Tree.BRANCH_FACTOR and \
+            len(self.tree.limbs) < Tree.MAX_LIMBS - Tree.BRANCH_FACTOR and \
             self.length >= Tree.LIMB_BRANCH_LENGTH:
             self.branch()
 
@@ -68,20 +67,23 @@ class Limb():
     def branch(self):
         self.children = []
         if self.leaf.id == 0:
-            self.children.append(Limb(self.tree, self, self.angle + randint(-20, 20), self.zangle + randint(-10, 10), self.leaf)) # keep trunk relatively straight
-
-        axis = randint(-10, 10)
-        spread = randint(10, 100)
-        angle_1 = axis - spread/2
-        angle_2 = axis + spread/2
-
-        zaxis = randint(-10, 10)
-        zspread = randint(10, 100)
-        zangle_1 = zaxis - zspread/2
-        zangle_2 = zaxis + zspread/2
-
-        self.children.append(Limb(self.tree, self, self.angle + angle_1, self.zangle + zangle_1, self.leaf if self.leaf.id != 0 else None))
-        self.children.append(Limb(self.tree, self, self.angle + angle_2, self.zangle + zangle_2))
+            self.children.append(Limb(self.tree, self, randint(0, 360), self.pitch + randint(-10, 10), self.leaf)) # keep trunk relatively straight
+            pitch = randint(60, 90)
+            rotation = self.tree.core_rotation
+            self.children.append(Limb(self.tree, self, rotation, self.pitch + pitch))
+            rotation += randint(100, 140)
+            rotation %= 360
+            self.children.append(Limb(self.tree, self, rotation, self.pitch + pitch))
+            rotation += randint(100, 140)
+            rotation %= 360
+            self.children.append(Limb(self.tree, self, rotation, self.pitch + pitch))
+            rotation += randint(100, 140)
+            rotation %= 360
+            self.tree.core_rotation += rotation
+        else:
+            pitch = randint(-50, 20)
+            self.children.append(Limb(self.tree, self, self.rotation + randint(10, 60), pitch, self.leaf if self.leaf.id != 0 else None))
+            self.children.append(Limb(self.tree, self, self.rotation + randint(-60, -10), pitch))
         self.leaf = None
 
 
@@ -99,6 +101,7 @@ class Tree(threading.Thread):
         self.limbs = []
         self.root = Limb(self)
         self.age = 0                    # age of tree in years
+        self.core_rotation = randint(0, 360)
         self.start()
 
     def run(self):
@@ -143,7 +146,7 @@ class Tree(threading.Thread):
 
 golden = (1 + 5**0.5) / 2
 def length_f(depth):
-    depth /= 2
+    depth /= 4
     return Tree.MAX_ROOT_LENGTH / golden**depth
 
 def growth_f(day):
@@ -154,10 +157,18 @@ def growth_f(day):
     else:
         return 0
 
-def get_point(start_point, angle, zangle, length):
+# def get_point(start_point, angle, zangle, length):
+#     x, y, z = start_point
+#     angle, zangle = math.radians(angle), math.radians(zangle)
+#     x += length * math.sin(zangle) * math.cos(angle)
+#     y += length * math.sin(zangle) * math.sin(angle)
+#     z += length * math.cos(zangle)
+#     return x, y, z
+
+def get_point(start_point, rotation, pitch, length):
     x, y, z = start_point
-    angle, zangle = math.radians(angle), math.radians(zangle)
-    x += length * math.sin(zangle) * math.cos(angle)
-    y += length * math.sin(zangle) * math.sin(angle)
-    z += length * math.cos(zangle)
+    rotation, pitch = math.radians(rotation), math.radians(pitch)
+    x += length * math.cos(pitch) * math.cos(rotation)
+    y += length * math.sin(pitch)
+    z += length * math.cos(pitch) * math.sin(-rotation)
     return x, y, z

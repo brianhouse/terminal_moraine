@@ -24,6 +24,7 @@ config = {
     'LIMB_BRANCH_LENGTH': 10,       # length before branching, in "pixels"
     'LIMB_GROWTH_AMOUNT': 2, #1/4,         # growth per tick, in "pixels"
     'LIMB_GROWTH_VARIANCE': .1,     # additional difference in growth rate among branches
+    'BRANCH_FACTOR': 2
     }
 
 
