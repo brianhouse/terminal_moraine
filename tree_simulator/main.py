@@ -16,42 +16,59 @@ config = {
     'DAY': 1/30,                # length of day in seconds
 
     # limits
-    'MAX_LEAVES': 32,           # hitting limits affects load, hence rate; better for it to hit the leaf limit
+    'MAX_LEAVES': 36,           # hitting limits affects load, hence rate; better for it to hit the leaf limit
     'MAX_LIMBS': 64,            # with double branching, limbs will be twice the leaves, minus 1
     'MAX_ROOT_LENGTH': 100,
+    'MAX_DEPTH': 5,
 
     # dynamics
     'LIMB_BRANCH_LENGTH': 10,       # length before branching, in "pixels"
-    'LIMB_GROWTH_AMOUNT': 2, #1/4,         # growth per tick, in "pixels"
+    'LIMB_GROWTH_AMOUNT': 1/8,         # growth per tick, in "pixels"
     'LIMB_GROWTH_VARIANCE': .1,     # additional difference in growth rate among branches
-    'BRANCH_FACTOR': 2
     }
 
 
-gains = [0] * config['MAX_LIMBS']
-rates = [0] * config['MAX_LIMBS']
-phases = [0] * config['MAX_LIMBS']
+gains = [0] * 127
+rates = [0] * 127
+phases = [0] * 127
+
+# harmonies = [0, 1/8, 1/4, 1/3, 1/2, 2/3, 7/8]
+# harmonies = [1 + 1/4, 1 + 1/3, 1 + 1/2, 1 + 2/3] # + leaves
+# harmonies = [1/4, 1/3, 1/2, 2+2/3, 8] # + leaves
+harmonies = [1/4, 1/2, 2/3, 1, 8]
+gain_adj = [1, .7, .5, 1/4, 1/10]
+n_limbs = 0
 
 
-def update_gains(tree, day):
+def update_params(tree, day):
     if day == 5:
         print("")
         print("activating")
+        print("depth", tree.depth)
         print("limbs", len(tree.limbs), "leaves", len(tree.leaves))
-
+        global n_limbs
+        n_limbs = len(tree.limbs)
         for limb in tree.limbs:
+
+            d = tree.depth - limb.depth
+            rate = harmonies[-d]
+            rates[limb.id] = rate
+
             l = limb
-            length = limb.length
+            # length = limb.length
+            length = 0  # discounting own length
             while l.parent is not None:
                 l = l.parent
                 length += l.length
-            delay = length/100
-            print(f"{limb.id+1} delay {delay:.2f} phase {phases[limb.id]:.2f} rate {rates[limb.id] * 4} depth {limb.depth}")
-            def s(id):
+            delay = length/50 + (random() * .5)
+
+            def s(id, d):
                 def f():
-                    gains[id] = 1
+                    gains[id] = gain_adj[-d]
                 return f
-            sonifier.add(s(limb.id), delay)
+            sonifier.add(s(limb.id, d), delay)
+
+            print(f"{limb.id+1} depth {limb.depth} length {length:.2f} delay {delay:.2f} phase {phases[limb.id]:.2f} rate {rates[limb.id]:.3f} gain {gain_adj[limb.depth]:.3f}")
 
     elif day == 250:
         print("winter")
@@ -63,25 +80,23 @@ def update_gains(tree, day):
             sonifier.add(s(limb.id), 0)
 
 
-def update_rates(tree, day):
-    if day == 1:
-        for limb in tree.limbs:
-            load = max(limb.load, 1)    # prevent rate swoops from 0
-            rate = config['MAX_LEAVES'] / load # current vs max possible load
-            rate *= .25  # global rate adjustment vs original playback speed of sample
-            rates[limb.id] = rate
-        print("updated rates")
-
-
 def sonify(tree, day):
-    update_gains(tree, day)
-    update_rates(tree, day)
+    global n_limbs
+    update_params(tree, day)
 
     # move tree
-    for limb in tree.limbs:
+    for l, limb in enumerate(tree.limbs):
 
-        gain = 1/16 * gains[limb.id]
+        # hack for emerging leaves
+        if day > 5 and day < 250:
+            if l >= n_limbs:
+                # print("BONUS LIMB")
+                rates[limb.id] = harmonies[-1]
+                gains[limb.id] = gain_adj[-1]
+                n_limbs += 1
+
         rate = rates[limb.id]
+        gain = gains[limb.id]
 
         # distribute and interleave the phasing
         phase = limb.id * (1 / config['MAX_LIMBS']) * .5
@@ -100,10 +115,10 @@ def sonify(tree, day):
 
 
 # reset synthesizer
-def reset():
+def reset_synth():
     for l in range(128):
         osc_out.send("limb/", [l+1, 0, 0, 0, 0, 0, 0])
-reset()
+reset_synth()
 
 # set up sonification callbacks
 sonifier = sonifier.Sonifier()
@@ -119,5 +134,5 @@ try:
     visualizer.start(tree)
 except KeyboardInterrupt:
     tree.stop()
-    reset()
+    reset_synth()
     time.sleep(.25)

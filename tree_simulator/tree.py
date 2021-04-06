@@ -57,10 +57,11 @@ class Limb():
         for child in self.children:
             child.grow(day)
         if self.leaf and \
-            len(self.tree.leaves) < Tree.MAX_LEAVES - Tree.BRANCH_FACTOR and \
-            len(self.tree.limbs) < Tree.MAX_LIMBS - Tree.BRANCH_FACTOR and \
+            self.tree.depth < Tree.MAX_DEPTH and \
             self.length >= Tree.LIMB_BRANCH_LENGTH:
             self.branch()
+            # len(self.tree.leaves) < Tree.MAX_LEAVES and \
+            # len(self.tree.limbs) < Tree.MAX_LIMBS and \
 
 
     ## TREE STRUCTURE IS DEFINED HERE ##
@@ -142,6 +143,16 @@ class Tree(threading.Thread):
         # call sonification function
         if self.callback:
             self.callback(self, day)
+
+    @property
+    def depth(self):
+        depth = 0
+        parent = self.leaves[0].limb
+        while parent is not None:
+            depth += 1
+            parent = parent.parent
+        return depth
+
 
 
 golden = (1 + 5**0.5) / 2
