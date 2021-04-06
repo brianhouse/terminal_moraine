@@ -13,7 +13,7 @@ osc_out.log_osc = False
 
 config = {
     # time
-    'DAY': 1/30,                # length of day in seconds
+    'DAY': 1/15,                # length of day in seconds
 
     # limits
     'MAX_LEAVES': 36,           # hitting limits affects load, hence rate; better for it to hit the leaf limit
@@ -23,7 +23,7 @@ config = {
 
     # dynamics
     'LIMB_BRANCH_LENGTH': 10,       # length before branching, in "pixels"
-    'LIMB_GROWTH_AMOUNT': 1/8,         # growth per tick, in "pixels"
+    'LIMB_GROWTH_AMOUNT': 1/8,      # growth per tick, in "pixels"
     'LIMB_GROWTH_VARIANCE': .1,     # additional difference in growth rate among branches
     }
 
@@ -37,6 +37,7 @@ phases = [0] * 127
 # harmonies = [1/4, 1/3, 1/2, 2+2/3, 8] # + leaves
 harmonies = [1/4, 1/2, 2/3, 1, 8]
 gain_adj = [1, .7, .5, 1/4, 1/10]
+delay_adj = .15
 n_limbs = 0
 
 
@@ -60,7 +61,7 @@ def update_params(tree, day):
             while l.parent is not None:
                 l = l.parent
                 length += l.length
-            delay = length/50 + (random() * .5)
+            delay = length/30 + (delay_adj / rate) + (.1 * random())
 
             def s(id, d):
                 def f():
@@ -77,7 +78,7 @@ def update_params(tree, day):
                 def f():
                     gains[id] = 0
                 return f
-            sonifier.add(s(limb.id), 0)
+            sonifier.add(s(limb.id), random() * 4)
 
 
 def sonify(tree, day):
