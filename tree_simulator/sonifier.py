@@ -25,3 +25,10 @@ class Sonifier(threading.Thread):
             for task in remaining_tasks:
                 self.queue.put(task)
             time.sleep(1/60)
+
+    def clear(self):
+        try:
+            while True:
+                self.queue.get_nowait()
+        except queue.Empty:
+            pass

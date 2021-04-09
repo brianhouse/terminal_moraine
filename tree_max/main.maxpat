@@ -467,7 +467,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"patching_rect" : [ 300.0, 83.0, 178.0, 22.0 ],
-					"text" : "buffer~ phrase phrase_4.wav -1"
+					"text" : "buffer~ phrase phrase_6.wav -1"
 				}
 
 			}

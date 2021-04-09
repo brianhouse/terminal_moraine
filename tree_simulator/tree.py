@@ -46,22 +46,20 @@ class Limb():
         while parent is not None:
             self.depth += 1
             parent = parent.parent
-        self.growth_variance = random() * Tree.LIMB_GROWTH_VARIANCE
         self.tree.limbs.append(self)
 
     def grow(self, day):
         self.start = self.parent.end if self.parent else (0, 0, 0)
-        if self.length < length_f(self.depth):
-            self.length += (growth_f(day) + self.growth_variance) * Tree.LIMB_GROWTH_AMOUNT
+        if self.length < length_f(self.depth) + (random() * .1):
+            self.length += growth_f(day)# + (random() * .1)
         self.end = get_point(self.start, self.rotation, self.pitch, self.length)
         for child in self.children:
             child.grow(day)
         if self.leaf and \
-            self.tree.depth < Tree.MAX_DEPTH and \
+            len(self.tree.limbs) < Tree.MAX_LIMBS - 2 and \
+            self.depth < Tree.MAX_DEPTH and \
             self.length >= Tree.LIMB_BRANCH_LENGTH:
             self.branch()
-            # len(self.tree.leaves) < Tree.MAX_LEAVES and \
-            # len(self.tree.limbs) < Tree.MAX_LIMBS and \
 
 
     ## TREE STRUCTURE IS DEFINED HERE ##
@@ -115,10 +113,10 @@ class Tree(threading.Thread):
             self.age = day // 365
             if day_of_year == 1:
                 print(f"tree is {self.age} years old")
-            time.sleep(Tree.DAY)
+            time.sleep(Tree.YEAR_TIME / 365)
             stop_t = time.perf_counter()
             elapsed = stop_t - start_t
-            delta = abs(elapsed - Tree.DAY)
+            delta = abs(elapsed - (Tree.YEAR_TIME / 365))
             if delta > 1/60:
                 print(f"whoops, perceptible latency in tree: {int(delta * 1000)}ms")
             start_t = stop_t
@@ -153,6 +151,14 @@ class Tree(threading.Thread):
             parent = parent.parent
         return depth
 
+    @property
+    def length(self):
+        limb = self.leaves[0].limb
+        length = limb.length
+        while limb.parent is not None:
+            limb = limb.parent
+            length += limb.length
+        return length if length > 0 else 0.001
 
 
 golden = (1 + 5**0.5) / 2
@@ -161,20 +167,10 @@ def length_f(depth):
     return Tree.MAX_ROOT_LENGTH / golden**depth
 
 def growth_f(day):
-    if day > 150 and day < 215:
-        return 7/8
-    elif day > 50 and day < 315:
-        return 1/8
+    if day >= 50 and day < 250: # 200 days
+        return Tree.GROWTH_PER_YEAR / 200
     else:
         return 0
-
-# def get_point(start_point, angle, zangle, length):
-#     x, y, z = start_point
-#     angle, zangle = math.radians(angle), math.radians(zangle)
-#     x += length * math.sin(zangle) * math.cos(angle)
-#     y += length * math.sin(zangle) * math.sin(angle)
-#     z += length * math.cos(zangle)
-#     return x, y, z
 
 def get_point(start_point, rotation, pitch, length):
     x, y, z = start_point
