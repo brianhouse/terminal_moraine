@@ -27,8 +27,8 @@ config = {
 
     }
 
-harmonies = [1/4, 1/2, 2/3, 1, 1+1/3], 8    # limbs, leaf
-gain_adj = [1, .7, .5, 1/4, 1/5], 1/24      # limbs, leaf
+harmonies = [1/2, 1, 4/3, 2, 2+2/3], [16, 4/3 * 2**4, 2/3 * 2**4]  # limbs, leaf
+gain_adj = [1, .7, .5, 1/4, 1/5], 1/32      # limbs, leaf
 
 
 def update_params(tree, day):
@@ -40,7 +40,7 @@ def update_params(tree, day):
 
             d = tree.depth - limb.depth
             if limb.leaf:
-                rate = harmonies[1]
+                rate = choice(harmonies[1])
             else:
                 rate = harmonies[0][-d]
             rates[limb.id] = rate
@@ -88,7 +88,7 @@ def sonify(tree, day):
         if day > 5 and day < 250:
             if l >= n_limbs:
                 print("...new leaf sprouted")
-                rates[limb.id] = harmonies[1]
+                rates[limb.id] = choice(harmonies[1])
                 gains[limb.id] = gain_adj[1]
                 n_limbs += 1
 
@@ -100,9 +100,6 @@ def sonify(tree, day):
         phase = index * (1 / len(siblings)) * .5
         phase = .5 - phase if index % 2 else phase
         phases[limb.id] = phase
-
-        # global adjustment as per sample
-        rate *= 2
 
         # set gain
         gain = gains[limb.id]

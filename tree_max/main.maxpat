@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 235.0, 53.0, 1011.0, 702.0 ],
+		"rect" : [ -262.0, -818.0, 1011.0, 702.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -467,7 +467,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
 					"patching_rect" : [ 300.0, 83.0, 178.0, 22.0 ],
-					"text" : "buffer~ phrase phrase_6.wav -1"
+					"text" : "buffer~ phrase phrase_0.wav -1"
 				}
 
 			}
