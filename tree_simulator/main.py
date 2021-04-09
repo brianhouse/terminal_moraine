@@ -13,7 +13,7 @@ osc_out.log_osc = False
 
 config = {
     # time
-    'DAY': 1/15,                # length of day in seconds
+    'DAY': 1/10,                # length of day in seconds
 
     # limits
     'MAX_LEAVES': 36,           # hitting limits affects load, hence rate; better for it to hit the leaf limit
@@ -36,7 +36,7 @@ phases = [0] * 127
 # harmonies = [1 + 1/4, 1 + 1/3, 1 + 1/2, 1 + 2/3] # + leaves
 # harmonies = [1/4, 1/3, 1/2, 2+2/3, 8] # + leaves
 harmonies = [1/4, 1/2, 2/3, 1, 8]
-gain_adj = [1, .7, .5, 1/4, 1/10]
+gain_adj = [1, .7, .5, 1/4, 1/16]
 delay_adj = .15
 n_limbs = 0
 
@@ -61,7 +61,7 @@ def update_params(tree, day):
             while l.parent is not None:
                 l = l.parent
                 length += l.length
-            delay = length/30 + (delay_adj / rate) + (.1 * random())
+            delay = length/20 + (delay_adj / rate) # + (4 * random()) #(limb.id / 10)
 
             def s(id, d):
                 def f():
@@ -88,6 +88,7 @@ def sonify(tree, day):
     # move tree
     for l, limb in enumerate(tree.limbs):
 
+
         # hack for emerging leaves
         if day > 5 and day < 250:
             if l >= n_limbs:
@@ -97,6 +98,19 @@ def sonify(tree, day):
                 n_limbs += 1
 
         rate = rates[limb.id]
+        # if rate != 8:
+        #     continue
+
+
+        siblings = [id for (id, r) in enumerate(rates) if r == rate]
+        index = siblings.index(limb.id)
+        phase = index * (1 / len(siblings)) * .5
+        phase = 1 - phase if index % 2 else phase
+        print(siblings, index, phase)
+
+
+        rate *= 2
+
         gain = gains[limb.id]
 
         # distribute and interleave the phasing
