@@ -52,6 +52,8 @@ else:
     while True:
         if start:
             print(f"Starting with {config['YEAR_TIME']}s per year until age {config['AGE']}...")
+            sonifier.reset_synth()
+            time.sleep(.25)
             tree = Tree(config, sonifier.callback)
             start = False
         if stop:
