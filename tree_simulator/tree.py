@@ -94,6 +94,8 @@ class Tree(threading.Thread):
         self.daemon = True
         for key, value in config.items():
             setattr(Tree, key, value)
+        Leaf.number = 0
+        Limb.number = 0
         self.callback = callback
         self.running = True
         self.leaves = []
