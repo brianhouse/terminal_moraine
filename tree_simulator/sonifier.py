@@ -5,7 +5,7 @@ from util.osc import OSCOut
 from tree import Tree
 
 osc_out = OSCOut(5005)
-osc_out.log_osc = False
+osc_out.log_osc = True
 
 
 harmonies = [1/2, 1, 4/3, 2, 2+2/3], [16, 4/3 * 2**4, 2/3 * 2**4]  # limbs, leaf
@@ -55,7 +55,7 @@ def update_params(tree, day):
                 def f():
                     gains[id] = 0
                 return f
-            scheduler.add(s(limb.id), random() * 4)
+            scheduler.add(s(limb.id), random() * 10)
 
 
 def sonify(tree, day):
@@ -89,7 +89,6 @@ def sonify(tree, day):
         pos_x = clip(rescale(limb.end[0], -250, 250, -1, 1), -1, 1)
         pos_y = clip(rescale(limb.end[2], -250, 250, 1, -1), -1, 1)
         pos_z = clip(rescale(limb.end[1], -250, 250, 1, -1), -1, 1)
-        pos_z = 0   # dropping
 
         # shift ids to 1-index
         osc_out.send("limb/", [limb.id+1, rate, phase, gain, pos_x, pos_y, pos_z])
